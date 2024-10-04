@@ -1,0 +1,24 @@
+*Separar todo en clases*
+
+El plan:
+
+1) Generalizar para N bidones
+
+2) Implementar una super clase Operation, que con herencias hacer las operaciones en cada caso
+for i
+    e1 = 0 -> Operation
+    if e1...
+
+3) Heurística: Usar "distancia a la salida"
+    Reemplazar
+        open <- cola de prioridad (heap)
+Colocar una prioridad en el Estado/State
+
+4) Optimizar los close -> all (podría ser tablas hash)
+
+*******************************************************
+
+Preguntas, pueden ser suposiciones en el desarrollo
+
+1) En el archivo de entrada, ¿se tiene que especificar la capacidad objetivo de TODOS los bidones?
+
