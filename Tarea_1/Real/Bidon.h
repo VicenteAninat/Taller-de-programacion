@@ -12,7 +12,8 @@ class Bidon {
     int aguaMaxima; // Capacidad maxima del bidon
     int aguaObjetivo; // Capacidad a la que se quiere llegar
 
+    Bidon(); // Constructor por defecto
     Bidon(int aguaActual, int aguaMaxima, int aguaObjetivo); // Constructor del estado
 
-    void print(); // Imprime el estado y toda la secuencia de operaciones que lo generaron
+    string print(); // Imprime el estado y toda la secuencia de operaciones que lo generaron
 };

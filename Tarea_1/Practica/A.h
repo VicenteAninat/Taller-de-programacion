@@ -1,24 +1,18 @@
-#ifndef A_H
-#define A_H
+#ifndef A_CLASS
+#define A_CLASS
+
 
 #include <iostream>
 
-/*
-  * Esta es la clase Madre de la cual hereredan varias otras
-  * la idea es que despuesse genere un arreglo de punteros a A
-  * y se itere llamando a "operate" para cada uno de los elementos
-  * del arreglo de manera generica.
-*/
+using namespace std;
+
 class A {
     public:
-    A(int a); // Constructor que llena a
-    A(); // Constructor vacio
-    ~A(); // Destructor
-
     int a;
-
-    // virtual indica que se va a sobre escribir este metodo
-    int virtual operate(int b); // Funcion que suma a y b    
+    A(); // ya que A es madre entonces requiere al menos un constructor por defecto
+    A(int a);
+    int virtual operate(int b); // virtual indica que se puede sobreescribir este metodo
+                                // se implementa como una tabla de punteros 
 };
 
 #endif

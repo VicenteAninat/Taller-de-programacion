@@ -1,18 +1,23 @@
 #include <iostream>
+#include <string>
 #include "State.h"
 
-class Queue {
+using namespace std;
+
+// Esta es una cola circular
+// Se implementa con un arreglo de punteros a State
+class Queue{
     public:
-    int back; // los que entran el ultimo
-    int front; // los que salen el primero
-    int size;
-    void push(State* s); // encolar en back
-    State* pop(); // sacar de front
-    bool is_empty();
-    int number_of_elements(); // numero de elementos en la cola
+    State **arr;
+    int front; // indice del primer elemento
+    int back; // indice del ultimo elemento
+    int size; // tamaño del arreglo
 
-    State** arr; // arreglo de estados que implementa la cola
-    Queue(int size); // constructor con tamaño 
-    bool contains(State* s); // verifica si un estado esta en la cola
-
+    Queue(); // crea una cola por defecto
+    Queue(int n); // crea una cola de tamaño n
+    int number_elements(); // cantidad de elementos de la cola
+    void push(State *s); // inserta un puntero a un estado
+    State * pop(); // saca el ṕrimer elemento de la cola 
+    bool find(State *s); // revisar si existe un estado con igual cantidad de agua en cada botella 
 };
+

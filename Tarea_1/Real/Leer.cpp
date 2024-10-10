@@ -1,5 +1,6 @@
 #include "Leer.h"
 #include "Bidon.h"
+#include "GrupoBidones.h"
 
 bool Leer::leerArchivo(string nombreArchivo) {
     // Abiendo el archivo
@@ -27,6 +28,24 @@ bool Leer::leerArchivo(string nombreArchivo) {
             istringstream objetivos (lineaObjetivos);
 
             int contador = 0;
+            istringstream capacidades2 (lineaCapacidades);
+
+            while (capacidades2) {
+                string capacidad;
+                capacidades2 >> capacidad;
+                if (capacidad.find_first_not_of("0123456789") != string::npos){
+                    cerr << "Error en el archivo, se espera un numero." << endl;
+                    return false;
+                }
+                else{
+                    contador++;
+                }
+            }
+
+            // Se crea un arreglo de punteros a objetos de la clase Bidon
+            Bidon** bidones = new Bidon*[contador];
+
+            int index = 0; // Se inicializa el indice de los bidones
 
             while (capacidades && objetivos){
                 string capacidad; // Se inicializa la variable receptora de la capacidad
@@ -44,13 +63,20 @@ bool Leer::leerArchivo(string nombreArchivo) {
                     int capacidadInt = stoi(capacidad);
                     int objetivoInt = stoi(objetivo);
 
-                    // Se crea un objeto de la clase Bidon
-                    Bidon bidon(0, capacidadInt, objetivoInt);
-                    // Se imprime el estado inicial
-                    bidon.print();
+                    // Se crea un puntero a un objeto de la clase Bidon
+                    Bidon* bidon = new Bidon(0, capacidadInt, objetivoInt);
+
+                    // Se almacena el puntero en el arreglo de punteros
+                    bidones[index] = bidon;
+                    index++;
+
+                    // Se imprime el estado inicial= capacidades
+                    bidon->print();
                     contador++;
                 }
             }
+
+            GrupoBidones* grupoBidones = new GrupoBidones(bidones, nullptr, "Inicial");
 
             // El archivo se cierra una vez leido
             archivo.close();

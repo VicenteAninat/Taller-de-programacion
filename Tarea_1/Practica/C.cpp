@@ -1,9 +1,9 @@
 #include "C.h"
 
-C::C(int c) {
-    a=100+c;
+C::C(int a) {
+    this->a=10*a;
+}
+int C::operate(int x) {
+    return(3*x+a);
 }
 
-int C::operate(int c){
-    return(10+c+a);
-}

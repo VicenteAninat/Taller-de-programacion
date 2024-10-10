@@ -1,18 +1,19 @@
 // Archivo de implementación
-
 #include "Bidon.h"
 
 // Constructor de la clase Bidon
-Bidon::Bidon(int a0, int a1, Bidon *parent, string operation){
-    this->a0 = a0;
-    this->a1 = a1;
-    this->parent = parent;
-    this->operation = operation;
+Bidon::Bidon() {
+    aguaActual = 0;
+    aguaMaxima = 0;
+    aguaObjetivo = 0;
 }
 
-void Bidon::print() {
-    if (parent != nullptr) {
-        parent->print();
-    }
-    cout << "a0: " << a0 << " a1: " << a1 << " parent: " << parent << " operation: " << operation << endl;
+Bidon::Bidon(int aguaActual, int aguaMaxima, int aguaObjetivo) {
+    this->aguaActual = aguaActual;
+    this->aguaMaxima = aguaMaxima;
+    this->aguaObjetivo = aguaObjetivo;
+}
+
+string Bidon::print() {
+    string salida = "Agua actual: " + std::to_string(aguaActual) + "\n" + "Agua maxima: " + std::to_string(aguaMaxima) + "\n" + "Agua objetivo: " + std::to_string(aguaObjetivo);
 }
