@@ -1,26 +1,45 @@
 FLAGS = -g
-#FLAGS = -O2
 
-all: test_Queue test_State test_Jug
+all: test_ABC test_State test_Queue test_Heap main readFile
 
-test_Queue: State.o Queue.o test_Queue.cpp
-	g++ ${FLAGS} State.o Queue.o test_Queue.cpp -o test_Queue
+A.o: A.cpp A.h 
+	g++ ${FLAGS} -c A.cpp
 
-test_State: State.o test_State.cpp
-	g++ ${FLAGS} State.o test_State.cpp -o test_State
+B.o: B.cpp B.h
+	g++ ${FLAGS} -c B.cpp
 
-test_Jug: State.o Queue.o Jug.o test_Jug.cpp
-	g++ ${FLAGS} State.o Queue.o Jug.o test_Jug.cpp -o test_Jug
+C.o: C.cpp C.h
+	g++ ${FLAGS} -c C.cpp
 
-State.o: State.h State.cpp
+test_ABC: test_ABC.cpp A.o B.o C.o
+	g++ ${FLAGS} A.o B.o C.o test_ABC.cpp -o test_ABC
+
+State.o: State.cpp State.h
 	g++ ${FLAGS} -c State.cpp
 
-Queue.o: Queue.h Queue.cpp
+Queue.o: Queue.cpp Queue.h
 	g++ ${FLAGS} -c Queue.cpp
 
-Jug.o: Jug.h Jug.cpp
+Heap.o: Heap.cpp Heap.h
+	g++ ${FLAGS} -c Heap.cpp
+
+Jug.o: Jug.cpp Jug.h
 	g++ ${FLAGS} -c Jug.cpp
 
-clean:
-	rm -f *.o test_Queue test_State test_Jug
+test_State: test_State.cpp State.o
+	g++ ${FLAGS} State.o test_State.cpp  -o test_State 
 
+test_Queue: test_Queue.cpp Queue.o
+	g++  ${FLAGS} State.o Queue.o test_Queue.cpp -o test_Queue 	
+
+test_Heap: test_Heap.cpp State.o Heap.o
+	g++ ${FLAGS} State.o Heap.o test_Heap.cpp -o test_Heap
+
+main: main.cpp Jug.o State.o Queue.o
+	g++ ${FLAGS} Jug.o State.o Queue.o main.cpp -o main
+
+readFile: readFile.cpp
+	g++ ${FLAGS} readFile.cpp -o readFile
+
+clean:
+	rm -f *.o test_State test_Queue test_Heap main readFile

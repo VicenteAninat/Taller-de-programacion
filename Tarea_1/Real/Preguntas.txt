@@ -16,9 +16,16 @@ Colocar una prioridad en el Estado/State
 
 4) Optimizar los close -> all (podría ser tablas hash)
 
+El camino más corto
+La ubicacion mas cercana me ayuda a encontrar el punto donde puedo llegar a la ubicacion
+objetivo de un solo salto más
+Mapa de multiples dimensiones
+Descartar caminos demasiado alejados
+
 *******************************************************
 
 Preguntas, pueden ser suposiciones en el desarrollo
 
 1) En el archivo de entrada, ¿se tiene que especificar la capacidad objetivo de TODOS los bidones?
 
+2) ¿Se puede usar istringstream?
