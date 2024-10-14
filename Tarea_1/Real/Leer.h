@@ -7,5 +7,5 @@ using namespace std;
 
 class Leer {
     public:
-    bool leerArchivo(string nombreArchivo);
+    GrupoBidones* leerArchivo(string nombreArchivo);
 };

@@ -2,13 +2,13 @@
 #include "Bidon.h"
 #include "GrupoBidones.h"
 
-bool Leer::leerArchivo(string nombreArchivo) {
+GrupoBidones* Leer::leerArchivo(string nombreArchivo) {
     // Abiendo el archivo
     ifstream archivo(nombreArchivo);
     // Se comprueba la existencia del archivo
     if (!archivo) {
         cerr << "Archivo no encontrado." << endl;
-        return false;
+        return nullptr;
     }
     else {
         // Se lee el contenido del archivo
@@ -19,7 +19,7 @@ bool Leer::leerArchivo(string nombreArchivo) {
 
         if (lineaCapacidades.length() != lineaObjetivos.length()){
             cerr << "Error en el archivo, las especificaciones de los bidones no coinciden." << endl;
-            return false;
+            return nullptr;
         }
         else{
             // Se inicializa la linea de capacidades para ser separada
@@ -35,7 +35,7 @@ bool Leer::leerArchivo(string nombreArchivo) {
                 capacidades2 >> capacidad;
                 if (capacidad.find_first_not_of("0123456789") != string::npos){
                     cerr << "Error en el archivo, se espera un numero." << endl;
-                    return false;
+                    return nullptr;
                 }
                 else{
                     contador++;
@@ -56,7 +56,7 @@ bool Leer::leerArchivo(string nombreArchivo) {
                 // Se comprueba que la capacidad y el objetivo sean numeros
                 if (capacidad.find_first_not_of("0123456789") != string::npos || objetivo.find_first_not_of("0123456789") != string::npos){
                     cerr << "Error en el archivo, se espera un numero." << endl;
-                    return false;
+                    return nullptr;
                 }
                 else{
                     // Se convierten las capacidades y objetivos a enteros
@@ -80,6 +80,8 @@ bool Leer::leerArchivo(string nombreArchivo) {
 
             // El archivo se cierra una vez leido
             archivo.close();
+
+            return grupoBidones;
         }
     };
 }

@@ -1,5 +1,6 @@
 #include "Menu.h"
 #include "Leer.h"
+#include "JugProb.h"
 
 void Menu::mostrarMenu(){
     // Se da la bienvenida al usuario
@@ -10,11 +11,14 @@ void Menu::mostrarMenu(){
     nombreArchivo = nombreArchivo + ".txt"; // Se concatena la extension del archivo
 
     Leer leer; // Se crea un objeto de la clase Leer
-    if (!leer.leerArchivo(nombreArchivo)){ // Se llama al metodo leerArchivo
+    GrupoBidones* caso = leer.leerArchivo(nombreArchivo);
+    if (caso == nullptr){ // Se llama al metodo leerArchivo
+        printf("No se pudo leer el archivo");
+        return;
+    } 
+    else {
+        JugProb problema;
+        problema.resolver(caso);
         return;
     }
-    else {
-        // Operacion
-    }
-    return;
 }
