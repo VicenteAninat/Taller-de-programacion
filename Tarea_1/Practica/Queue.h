@@ -20,4 +20,3 @@ class Queue{
     State * pop(); // saca el ṕrimer elemento de la cola 
     bool find(State *s); // revisar si existe un estado con igual cantidad de agua en cada botella 
 };
-
