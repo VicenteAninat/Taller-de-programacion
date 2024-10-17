@@ -1,6 +1,4 @@
 #include "Menu.h"
-#include "Leer.h"
-#include "JugProb.h"
 
 void Menu::mostrarMenu(){
     // Se da la bienvenida al usuario

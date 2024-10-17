@@ -22,10 +22,25 @@ objetivo de un solo salto más
 Mapa de multiples dimensiones
 Descartar caminos demasiado alejados
 
+La operacion:
+- Hay que crear el arreglo de visitados y el arreglo de todos
+- Parto del primer estado y desde ese se empiezan a crear más
+- ¿Un arreglo de estados?
+- ¿Un ciclo hasta llegar al estado final?
+- ¿Un while con verificador booleano?
+- ¿Recursividad?
+- ¿Arreglo de estados y operarlos con un for?
+- ¿El salto de fé?
+- Como hago el calculo de la distancia en n dimensiones
+    - ¿Distancia euclidiana?
+    - ¿Distancia discreta?
+
 *******************************************************
 
 Preguntas, pueden ser suposiciones en el desarrollo
 
 1) En el archivo de entrada, ¿se tiene que especificar la capacidad objetivo de TODOS los bidones?
+R: Si
 
 2) ¿Se puede usar istringstream?
+R: Si

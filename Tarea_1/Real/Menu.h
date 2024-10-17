@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include "Leer.h"
+#include "JugProb.h"
 
 using namespace std;
 

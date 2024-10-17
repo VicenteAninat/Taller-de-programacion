@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include "Bidon.h"
+#include "GrupoBidones.h"
 
 using namespace std;
 

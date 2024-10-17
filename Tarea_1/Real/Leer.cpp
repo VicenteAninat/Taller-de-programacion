@@ -1,6 +1,10 @@
 #include "Leer.h"
-#include "Bidon.h"
-#include "GrupoBidones.h"
+
+
+int getMCD(int a, int b) {
+    if(b == 0) return a;
+    return getMCD(b, a%b);
+}
 
 GrupoBidones* Leer::leerArchivo(string nombreArchivo) {
     // Abiendo el archivo
@@ -38,12 +42,15 @@ GrupoBidones* Leer::leerArchivo(string nombreArchivo) {
                     return nullptr;
                 }
                 else{
+                    
                     contador++;
                 }
             }
 
             // Se crea un arreglo de punteros a objetos de la clase Bidon
             Bidon** bidones = new Bidon*[contador];
+
+            int arrCapacidades[contador];
 
             int index = 0; // Se inicializa el indice de los bidones
 
@@ -68,6 +75,7 @@ GrupoBidones* Leer::leerArchivo(string nombreArchivo) {
 
                     // Se almacena el puntero en el arreglo de punteros
                     bidones[index] = bidon;
+                    arrCapacidades[index] = capacidadInt;
                     index++;
 
                     // Se imprime el estado inicial= capacidades
@@ -76,12 +84,28 @@ GrupoBidones* Leer::leerArchivo(string nombreArchivo) {
                 }
             }
 
-            GrupoBidones* grupoBidones = new GrupoBidones(bidones, nullptr, "Inicial");
-
-            // El archivo se cierra una vez leido
-            archivo.close();
-
-            return grupoBidones;
+            // Se comprueba que las capacidades sean coprimas
+            int mcd = 0;
+            for (int i = 0; i < contador; i++){
+                if (i == 0){
+                    mcd = getMCD(arrCapacidades[0], arrCapacidades[1]);
+                } else {
+                    mcd = getMCD(mcd, arrCapacidades[i]);
+                }
+                i++;
+            }
+            if (mcd != 1){
+                cerr << "Error en el archivo, las capacidades no son coprimas." << endl;
+                // El archivo se cierra una vez leido
+                archivo.close();
+                return nullptr;
+            } else {
+                cout << "Archivo valido.\n" << endl;
+                GrupoBidones* grupoBidones = new GrupoBidones(bidones, nullptr, "Inicial");
+                // El archivo se cierra una vez leido
+                archivo.close();
+                return grupoBidones;
+            }
         }
-    };
+    }
 }

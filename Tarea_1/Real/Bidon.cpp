@@ -16,4 +16,5 @@ Bidon::Bidon(int aguaActual, int aguaMaxima, int aguaObjetivo) {
 
 string Bidon::print() {
     string salida = "Agua actual: " + std::to_string(aguaActual) + "\n" + "Agua maxima: " + std::to_string(aguaMaxima) + "\n" + "Agua objetivo: " + std::to_string(aguaObjetivo);
+    return salida;
 }
