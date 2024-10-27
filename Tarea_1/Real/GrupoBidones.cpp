@@ -1,24 +1,37 @@
 // Archivo de implementación
 #include "GrupoBidones.h"
 
-GrupoBidones::GrupoBidones(Bidon *bidones[], GrupoBidones *parent, string operation) {
-    this->bidon = bidones;
-    this->parent = parent;
-    this->operation = operation;
+GrupoBidones::GrupoBidones(int n) {
+    bidones = new Bidon*[n];
+    for (int i = 0; i < n; i++) {
+        bidones[i] = new Bidon();
+    }
+    this->bidones = bidones;
+    parent = nullptr;
+    operation = "";
+    this->cantidad = n;
 }
 
-string GrupoBidones::imprimirBidones(Bidon *bidones[]){
+GrupoBidones::GrupoBidones(Bidon** bidones, GrupoBidones *parent, string operation, int cantidad) {
+    this->bidones = bidones;
+    this->parent = parent;
+    this->operation = operation;
+    this->cantidad = cantidad;
+}
+
+string GrupoBidones::imprimirBidones(Bidon** bidones, int cantidad){
     string imprimir = "";
-    for (int i = 0; i < sizeof(bidones); i++) {
-        imprimir = imprimir + "Bidon " + to_string(i) + ": " + bidones[i]->print() + "\n";
+    for (int i = 0; i < cantidad; i++) {
+        imprimir = imprimir + "Bidon " + to_string(i + 1) + ":\n" + bidones[i]->print() + "\n";
     }
     return imprimir;
 }
 
-void GrupoBidones::print(){
+string GrupoBidones::print(){
     if (parent != nullptr) {
         parent->print();
     }
 
-    cout << "Imprimir bidones" << "Operacion: " << operation << endl;
+    string salida = "Bidones:\n" + imprimirBidones(bidones, cantidad)+ "\n" + "Operacion: " + operation;
+    return salida;
 }

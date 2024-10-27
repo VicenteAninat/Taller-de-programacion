@@ -42,7 +42,6 @@ GrupoBidones* Leer::leerArchivo(string nombreArchivo) {
                     return nullptr;
                 }
                 else{
-                    
                     contador++;
                 }
             }
@@ -101,7 +100,7 @@ GrupoBidones* Leer::leerArchivo(string nombreArchivo) {
                 return nullptr;
             } else {
                 cout << "Archivo valido.\n" << endl;
-                GrupoBidones* grupoBidones = new GrupoBidones(bidones, nullptr, "Inicial");
+                GrupoBidones* grupoBidones = new GrupoBidones(bidones, nullptr, "Estado inicial");
                 // El archivo se cierra una vez leido
                 archivo.close();
                 return grupoBidones;

@@ -3,9 +3,9 @@
 
 // Constructor de la clase Bidon
 Bidon::Bidon() {
-    aguaActual = 0;
-    aguaMaxima = 0;
-    aguaObjetivo = 0;
+    this->aguaActual = -1;
+    this->aguaMaxima = -1;
+    this->aguaObjetivo = -1;
 }
 
 Bidon::Bidon(int aguaActual, int aguaMaxima, int aguaObjetivo) {

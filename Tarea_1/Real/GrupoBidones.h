@@ -1,20 +1,25 @@
 #include <iostream>
-#include "Bidon.h"
 #include <string>
+#include "Bidon.h"
 
 using namespace std;
 
 class GrupoBidones{
     public:
     // Se definen los atributos del estado
-    Bidon **bidon;
-    GrupoBidones *parent;
-    string operation;
+    Bidon** bidones; // Arreglo de punteros a bidones
+    GrupoBidones *parent; // Puntero al padre
+    string operation; // Operación realizada
+    int cantidad;
+
+    GrupoBidones(int n); // Constructor por defecto
+
+    //GrupoBidones* ClonarBidon(); // Toma un Estado y retorna un puntero a clon para ser el hijo
 
     // Constructor del estado
-    GrupoBidones(Bidon *bidones[], GrupoBidones *parent, string operation);
+    GrupoBidones(Bidon** bidones, GrupoBidones *parent, string operation, int cantidad);
 
-    string imprimirBidones(Bidon *bidones[]);
+    string imprimirBidones(Bidon** bidones, int cantidad);
 
-    void print(); // Imprime el estado y toda la secuencia de operaciones que lo generaron
+    string print(); // Imprime el estado y toda la secuencia de operaciones que lo generaron
 };

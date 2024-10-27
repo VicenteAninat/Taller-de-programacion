@@ -35,6 +35,9 @@ La operacion:
     - ¿Distancia euclidiana?
     - ¿Distancia discreta?
 
+- Agregar atributo Cantidad a GrupoBidones
+- 
+
 *******************************************************
 
 Preguntas, pueden ser suposiciones en el desarrollo
