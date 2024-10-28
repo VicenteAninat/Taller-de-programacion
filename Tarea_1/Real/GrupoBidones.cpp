@@ -1,6 +1,13 @@
 // Archivo de implementación
 #include "GrupoBidones.h"
 
+GrupoBidones::GrupoBidones(){
+    this->bidones = nullptr;
+    this->parent = nullptr;
+    this->operation = "";
+    this->cantidad = -1;
+}
+
 // Constructor por defecto de la clase GrupoBidones
 GrupoBidones::GrupoBidones(int n) {
     // Inicialización del arreglo de bidones

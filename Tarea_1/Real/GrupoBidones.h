@@ -14,6 +14,8 @@ class GrupoBidones{
     string operation; // Operación realizada
     int cantidad; // Cantidad de bidones para construir arreglos
 
+    GrupoBidones();
+
     GrupoBidones(int n); // Constructor por defecto. Necesita la cantidad de bidones
 
     //GrupoBidones* ClonarBidon(); // Toma un Estado y retorna un puntero a clon para ser el hijo

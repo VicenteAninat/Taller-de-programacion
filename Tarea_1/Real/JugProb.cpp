@@ -3,8 +3,16 @@
 
 void JugProb::resolver(GrupoBidones nodo){
     std::mt19937 gen(123);
-    // crear no visitados
-    // crear all
+    int capacidad = 100;
+
+    int cantidad = nodo.cantidad;
+
+    // crear no visitados (arreglo de aumento de memoria)
+    GrupoBidones* noVisitados = new GrupoBidones[capacidad];
+    // crear all (arreglo de aumento de memoria)
+    GrupoBidones* all = new GrupoBidones[capacidad];
     
+    
+
     return;
 }
