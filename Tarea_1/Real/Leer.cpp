@@ -1,18 +1,22 @@
 #include "Leer.h"
 
-
-int getMCD(int a, int b) {
-    if(b == 0) return a;
-    return getMCD(b, a%b);
+// Metodo auxiliar para obtener el MCD de dos numeros
+int Leer::getMCD(int a, int b){
+    if (a == 0){
+        return b;
+    }
+    return getMCD(b % a, a);
 }
 
-GrupoBidones* Leer::leerArchivo(string nombreArchivo) {
+// Metodo para leer un archivo y retornar un puntero a GrupoBidones
+GrupoBidones Leer::leerArchivo(string nombreArchivo) {
     // Abiendo el archivo
     ifstream archivo(nombreArchivo);
+
     // Se comprueba la existencia del archivo
     if (!archivo) {
         cerr << "Archivo no encontrado." << endl;
-        return nullptr;
+        return GrupoBidones(0);
     }
     else {
         // Se lee el contenido del archivo
@@ -23,7 +27,7 @@ GrupoBidones* Leer::leerArchivo(string nombreArchivo) {
 
         if (lineaCapacidades.length() != lineaObjetivos.length()){
             cerr << "Error en el archivo, las especificaciones de los bidones no coinciden." << endl;
-            return nullptr;
+            return GrupoBidones(0);
         }
         else{
             // Se inicializa la linea de capacidades para ser separada
@@ -39,32 +43,32 @@ GrupoBidones* Leer::leerArchivo(string nombreArchivo) {
                 capacidades2 >> capacidad;
                 if (capacidad.find_first_not_of("0123456789") != string::npos){
                     cerr << "Error en el archivo, se espera un numero." << endl;
-                    return nullptr;
+                    return GrupoBidones(0);
                 }
                 else{
                     contador++;
                 }
             }
-
+            contador--;
             // Se crea un arreglo de punteros a objetos de la clase Bidon
             Bidon** bidones = new Bidon*[contador];
 
             int arrCapacidades[contador];
 
-            int index = 0; // Se inicializa el indice de los bidones
+            string capacidad; // Se inicializa la variable receptora de la capacidad
+            string objetivo; // Se inicializa la variable receptora del objetivo
+            capacidades >> capacidad; // Se lee la capacidad
+            objetivos >> objetivo; // Se lee el objetivo
 
-            while (capacidades && objetivos){
-                string capacidad; // Se inicializa la variable receptora de la capacidad
-                string objetivo; // Se inicializa la variable receptora del objetivo
-                capacidades >> capacidad; // Se lee la capacidad
-                objetivos >> objetivo; // Se lee el objetivo
-
-                // Se comprueba que la capacidad y el objetivo sean numeros
-                if (capacidad.find_first_not_of("0123456789") != string::npos || objetivo.find_first_not_of("0123456789") != string::npos){
-                    cerr << "Error en el archivo, se espera un numero." << endl;
-                    return nullptr;
-                }
-                else{
+            // Se comprueba que la capacidad y el objetivo sean numeros
+            if (capacidad.find_first_not_of("0123456789") != string::npos || objetivo.find_first_not_of("0123456789") != string::npos){
+                cerr << "Error en el archivo, se espera un numero." << endl;
+                return GrupoBidones(0);
+            } else{
+                int index = 0; // Se inicializa el indice de los bidones
+                Bidon** bidones;
+                bidones = new Bidon* [contador];
+                while (index < contador){
                     // Se convierten las capacidades y objetivos a enteros
                     int capacidadInt = stoi(capacidad);
                     int objetivoInt = stoi(objetivo);
@@ -75,35 +79,39 @@ GrupoBidones* Leer::leerArchivo(string nombreArchivo) {
                     // Se almacena el puntero en el arreglo de punteros
                     bidones[index] = bidon;
                     arrCapacidades[index] = capacidadInt;
+
                     index++;
 
-                    // Se imprime el estado inicial= capacidades
-                    bidon->print();
-                    contador++;
+                    // Se lee la siguiente capacidad
+                    capacidades >> capacidad;
+                    objetivos >> objetivo;
                 }
-            }
 
-            // Se comprueba que las capacidades sean coprimas
-            int mcd = 0;
-            for (int i = 0; i < contador; i++){
-                if (i == 0){
-                    mcd = getMCD(arrCapacidades[0], arrCapacidades[1]);
-                } else {
-                    mcd = getMCD(mcd, arrCapacidades[i]);
+                // Se calcula el MCD de los bidones
+                int mcd = 0;
+                for (int i = 0; i < contador; i++){
+                    if (i == 0){
+                        mcd = getMCD(arrCapacidades[0], arrCapacidades[1]);
+                    } else {
+                        mcd = getMCD(mcd, arrCapacidades[i]);
+                    }
+                    i++;
                 }
-                i++;
-            }
-            if (mcd != 1){
-                cerr << "Error en el archivo, las capacidades no son coprimas." << endl;
-                // El archivo se cierra una vez leido
-                archivo.close();
-                return nullptr;
-            } else {
-                cout << "Archivo valido.\n" << endl;
-                GrupoBidones* grupoBidones = new GrupoBidones(bidones, nullptr, "Estado inicial");
-                // El archivo se cierra una vez leido
-                archivo.close();
-                return grupoBidones;
+
+                // Se comprueba que las capacidades sean coprimas
+                if (mcd != 1){
+                    cerr << "Error en el archivo, las capacidades no son coprimas." << endl;
+                    // El archivo se cierra una vez leido
+                    archivo.close();
+                    return GrupoBidones(0);
+                } else {
+                    cout << "Archivo valido.\n" << endl;
+                    GrupoBidones grupoBidones = GrupoBidones(bidones, nullptr, "Estado inicial", contador);
+                    // El archivo se cierra una vez leido
+                    archivo.close();
+
+                    return grupoBidones;
+                }
             }
         }
     }

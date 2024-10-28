@@ -4,5 +4,5 @@
 
 class JugProb{
     public:
-    void JugProb::resolver(GrupoBidones* grupo);
+    void resolver(GrupoBidones grupo);
 };

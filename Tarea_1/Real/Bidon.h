@@ -1,3 +1,7 @@
+#ifndef BIDON_H
+#define BIDON_H
+
+
 // Se incluyen todas las librerias necesarias
 #include <iostream>
 #include <string>
@@ -17,3 +21,5 @@ class Bidon {
 
     string print(); // Imprime el estado y toda la secuencia de operaciones que lo generaron
 };
+
+#endif

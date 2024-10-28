@@ -1,3 +1,4 @@
+#include <iostream>
 #include "GrupoBidones.h"
 
 int main() {
@@ -10,7 +11,7 @@ int main() {
     bidones[0] = bidon1;
     bidones[1] = bidon2;
 
-GrupoBidones grupo1 = GrupoBidones(bidones, NULL, "Inicial", 2);
+GrupoBidones grupo1 = GrupoBidones(bidones, nullptr, "Inicial", 2);
 
     cout << grupo1.print() << endl;
     return 0;

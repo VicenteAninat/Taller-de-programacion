@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Bidon.h"
 
 Bidon bidon1 = Bidon(0, 2, 0);

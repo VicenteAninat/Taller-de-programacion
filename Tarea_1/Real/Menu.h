@@ -8,4 +8,5 @@ using namespace std;
 class Menu{
     public:
     void mostrarMenu();
+    void mostrarMenuTest();
 };
