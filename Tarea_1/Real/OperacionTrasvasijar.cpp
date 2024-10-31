@@ -1,15 +1,16 @@
 #include "OperacionTrasvasijar.h"
 
-Bidon OperacionTrasvasijar::operacionTrasvasijar(Bidon bidon1, Bidon bidon2){
-    Bidon bidonAux1 = bidon1;
-    Bidon bidonAux2 = bidon2;
-    int aguaTrasvasijada = bidonAux1.aguaActual;
-    if(bidonAux2.aguaActual + bidonAux1.aguaActual > bidonAux2.aguaMaxima){
-        bidonAux1.aguaActual = bidonAux1.aguaActual - (bidonAux2.aguaMaxima - bidonAux2.aguaActual);
-        bidonAux2.aguaActual = bidonAux2.aguaMaxima;
-    } else {
-        bidonAux2.aguaActual = bidonAux2.aguaActual + bidonAux1.aguaActual;
-        bidonAux1.aguaActual = 0;
+GrupoBidones OperacionTrasvasijar::operacionTrasvasijar(GrupoBidones grupo, int indice1, int indice2){
+    GrupoBidones grupoAux = grupo;
+    int aguaTrasvasijada = grupoAux.bidones[indice1]->aguaActual;
+    if(grupoAux.bidones[indice2]->aguaActual + aguaTrasvasijada <= grupoAux.bidones[indice2]->aguaMaxima){
+        grupoAux.bidones[indice2]->aguaActual += aguaTrasvasijada;
+        grupoAux.bidones[indice1]->aguaActual = 0;
+    }else{
+        grupoAux.bidones[indice1]->aguaActual = grupoAux.bidones[indice1]->aguaActual - (grupoAux.bidones[indice2]->aguaMaxima - grupoAux.bidones[indice2]->aguaActual);
+        grupoAux.bidones[indice2]->aguaActual = grupoAux.bidones[indice2]->aguaMaxima;
     }
-    return bidonAux2;
+
+    grupoAux.operation = "Trasvasijar bidon " + to_string(indice1 + 1) + " a bidon " + to_string(indice2 + 1);
+    return grupoAux;
 }

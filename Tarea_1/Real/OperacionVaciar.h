@@ -3,5 +3,5 @@
 class OperacionVaciar : public Operacion {
     public:
 
-    GrupoBidones operacion(GrupoBidones grupo);
+    GrupoBidones operacion(GrupoBidones grupo, int indice);
 };
