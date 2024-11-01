@@ -7,5 +7,10 @@
 
 class JugProb{
     public:
+
+    int crearCodigoHash(GrupoBidones grupo, int numeroEstados);
+    int insertarEstadoHash(GrupoBidones estado, GrupoBidones* tablaHash, int indice);
+    bool buscarEstadoHash(GrupoBidones estado, GrupoBidones* tablaHash, int indice, int capacidad);
+
     void resolver(GrupoBidones grupo);
 };

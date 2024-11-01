@@ -56,5 +56,6 @@ OperacionTrasvasijar.o : OperacionTrasvasijar.cpp OperacionTrasvasijar.h
 OperacionVaciar.o : OperacionVaciar.cpp OperacionVaciar.h
 	g++ ${FLAGS} -c OperacionVaciar.cpp
 
-clear:
+
+clean:
 	rm -f *.o test_Bidon test_GrupoBidones test_JugProb test_Leer test_Main test_Menu test_OperacionLlenar test_OperacionTrasvasijar test_OperacionVaciar
