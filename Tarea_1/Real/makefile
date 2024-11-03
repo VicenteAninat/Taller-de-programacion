@@ -1,7 +1,7 @@
 FLAGS = -g
 #FLAGS = -O2
 
-all: test_Bidon test_GrupoBidones test_Leer test_OperacionLlenar test_OperacionTrasvasijar test_OperacionVaciar test_JugProb test_Menu
+all: test_Bidon test_GrupoBidones test_Leer test_Hash test_OperacionLlenar test_OperacionTrasvasijar test_OperacionVaciar test_JugProb test_Menu
 # test_Main  
 
 test_Bidon: Bidon.o test_Bidon.cpp
@@ -14,10 +14,10 @@ test_Leer: Leer.o test_Leer.cpp
 	g++ ${FLAGS} Leer.o test_Leer.cpp GrupoBidones.o Bidon.o -o test_Leer
 
 test_JugProb: JugProb.o test_JugProb.cpp
-	g++ ${FLAGS} JugProb.o test_JugProb.cpp OperacionLlenar.o OperacionTrasvasijar.o OperacionVaciar.o GrupoBidones.o Bidon.o -o test_JugProb
+	g++ ${FLAGS} JugProb.o test_JugProb.cpp Hash.o Operacion.o OperacionLlenar.o OperacionTrasvasijar.o OperacionVaciar.o GrupoBidones.o Bidon.o -o test_JugProb
 
 test_Menu: Menu.o test_Menu.cpp
-	g++ ${FLAGS} Menu.o test_Menu.cpp JugProb.o Leer.o GrupoBidones.o Bidon.o -o test_Menu
+	g++ ${FLAGS} Menu.o test_Menu.cpp Hash.o JugProb.o Operacion.o OperacionLlenar.o OperacionTrasvasijar.o OperacionVaciar.o Leer.o GrupoBidones.o Bidon.o -o test_Menu
 
 test_OperacionLlenar: OperacionLlenar.o test_OperacionLlenar.cpp Operacion.o
 	g++ ${FLAGS} OperacionLlenar.o test_OperacionLlenar.cpp Operacion.o GrupoBidones.o Bidon.o -o test_OperacionLlenar
@@ -27,6 +27,9 @@ test_OperacionTrasvasijar: OperacionTrasvasijar.o test_OperacionTrasvasijar.cpp 
 
 test_OperacionVaciar: OperacionVaciar.o test_OperacionVaciar.cpp Operacion.o
 	g++ ${FLAGS} OperacionVaciar.o test_OperacionVaciar.cpp Operacion.o GrupoBidones.o Bidon.o -o test_OperacionVaciar
+
+test_Hash: Hash.o test_Hash.cpp
+	g++ ${FLAGS} Hash.o test_Hash.cpp GrupoBidones.o Bidon.o -o test_Hash
 
 
 Bidon.o : Bidon.cpp Bidon.h
@@ -56,6 +59,9 @@ OperacionTrasvasijar.o : OperacionTrasvasijar.cpp OperacionTrasvasijar.h
 OperacionVaciar.o : OperacionVaciar.cpp OperacionVaciar.h
 	g++ ${FLAGS} -c OperacionVaciar.cpp
 
+Hash.o : Hash.cpp Hash.h
+	g++ ${FLAGS} -c Hash.cpp
+
 
 clean:
-	rm -f *.o test_Bidon test_GrupoBidones test_JugProb test_Leer test_Main test_Menu test_OperacionLlenar test_OperacionTrasvasijar test_OperacionVaciar
+	rm -f *.o test_Bidon test_GrupoBidones test_JugProb test_Leer test_Main test_Menu test_OperacionLlenar test_OperacionTrasvasijar test_OperacionVaciar test_Hash

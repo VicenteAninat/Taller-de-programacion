@@ -1,16 +1,18 @@
+#ifndef JUGPROB_H
+#define JUGPROB_H
+
 // Clase de resolución del problema
 #include "GrupoBidones.h"
 #include "OperacionLlenar.h"
 #include "OperacionVaciar.h"
 #include "OperacionTrasvasijar.h"
+#include "Hash.h"
 #include <random>
 
 class JugProb{
     public:
 
-    int crearCodigoHash(GrupoBidones grupo, int numeroEstados);
-    int insertarEstadoHash(GrupoBidones estado, GrupoBidones* tablaHash, int indice);
-    bool buscarEstadoHash(GrupoBidones estado, GrupoBidones* tablaHash, int indice, int capacidad);
-
     void resolver(GrupoBidones grupo);
 };
+
+#endif

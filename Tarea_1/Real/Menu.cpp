@@ -15,8 +15,7 @@ void Menu::mostrarMenu(){
         return;
     } 
     else {
-        JugProb problema;
-        problema.resolver(caso);
+        JugProb().resolver(caso); // Se llama al metodo resolver
         return;
     }
 }

@@ -1,53 +1,6 @@
 // Archivo de implementación de la clase JugProb.h
 #include "JugProb.h"
 
-// Método para crear un código hash
-int crearCodigoHash(GrupoBidones grupo, int numeroEstados){
-    int codigoHash = 0;
-    for (int i = 0; i < grupo.cantidad; i++){
-        codigoHash += (grupo.bidones[i]->aguaActual)*(i+1);
-    }
-    codigoHash = codigoHash % numeroEstados;
-    return codigoHash;
-}
-
-// Método para insertar un estado en una tabla hash
-void insertarEstadoHash(GrupoBidones estado, GrupoBidones* tablaHash, int indice){
-    bool insertado = false;
-    while (!insertado){
-        if (tablaHash[indice].bidones != nullptr){
-            indice++;
-        }
-        else{
-            tablaHash[indice] = estado;
-            insertado = true;
-        }
-    }
-
-    return;
-}
-
-// Método para verificar si un estado ya ha sido calculado
-bool buscarEstadoHash(GrupoBidones estado, GrupoBidones* tablaHash, int indice, int capacidad){
-    bool encontrado = false;
-    while (!encontrado && (indice < capacidad - 1)){
-        if (tablaHash[indice].bidones == nullptr){
-            break;
-        }
-        else{
-            if (tablaHash[indice].bidones == estado.bidones){
-                encontrado = true;
-                break;
-            }
-            else{
-                indice++;
-            }
-        }
-    }
-
-    return encontrado;
-}
-
 void JugProb::resolver(GrupoBidones nodo){
     std::mt19937 gen(123);
     int capacidad = 100;
@@ -94,22 +47,22 @@ void JugProb::resolver(GrupoBidones nodo){
                 for (int j = 0; j < noVisitados[i].cantidad; j++) {
                     // Si el bidon no está lleno, se puede llenar
                     if (noVisitados[i].bidones[j]->aguaActual != noVisitados[i].bidones[j]->aguaMaxima){
-                        GrupoBidones estadoLlenado = OperacionLlenar::operacion(noVisitados[i], j);
-                        int codigoHash = crearCodigoHash(estadoLlenado, capacidad);
-                        if (!buscarEstadoHash(estadoLlenado, all, codigoHash, capacidad)){
-                            insertarEstadoHash(estadoLlenado, all, codigoHash);
+                        GrupoBidones estadoLlenado = OperacionLlenar().operacion(noVisitados[i], j);
+                        int codigoHash = Hash().crearCodigoHash(estadoLlenado, capacidad);
+                        if (!Hash().buscarEstadoHash(estadoLlenado, all, codigoHash, capacidad)){
+                            Hash().insertarEstadoHash(estadoLlenado, all, codigoHash);
                             noVisitadosAux[indiceAux] = estadoLlenado;
                             indiceAux++;
                         }
                         
                     }
-
+                    
                     // Si el bidon no está vacío, se puede vaciar
                     if (noVisitados[i].bidones[j]->aguaActual != 0){
-                        GrupoBidones estadoVaciado = OperacionVaciar::operacion(noVisitados[i], j);
-                        int codigoHash = crearCodigoHash(estadoVaciado, capacidad);
-                        if (!buscarEstadoHash(estadoVaciado, all, codigoHash, capacidad)){
-                            insertarEstadoHash(estadoVaciado, all, codigoHash);
+                        GrupoBidones estadoVaciado = OperacionVaciar().operacion(noVisitados[i], j);
+                        int codigoHash = Hash().crearCodigoHash(estadoVaciado, capacidad);
+                        if (!Hash().buscarEstadoHash(estadoVaciado, all, codigoHash, capacidad)){
+                            Hash().insertarEstadoHash(estadoVaciado, all, codigoHash);
                             noVisitadosAux[indiceAux] = estadoVaciado;
                             indiceAux++;
                         }
@@ -120,10 +73,10 @@ void JugProb::resolver(GrupoBidones nodo){
                             (noVisitados[i].bidones[j]->aguaActual != 0 && noVisitados[i].bidones[k]->aguaActual != 0) || 
                             (noVisitados[i].bidones[j]->aguaActual != noVisitados[i].bidones[j]->aguaMaxima && noVisitados[i].bidones[k]->aguaActual != noVisitados[i].bidones[k]->aguaMaxima)
                             )){
-                            GrupoBidones estadoTrasvasijado = OperacionTrasvasijar::operacion(noVisitados[i], j, k);
-                            int codigoHash = crearCodigoHash(estadoTrasvasijado, capacidad);
-                            if (!buscarEstadoHash(estadoTrasvasijado, all, codigoHash, capacidad)){
-                                insertarEstadoHash(estadoTrasvasijado, all, codigoHash);
+                            GrupoBidones estadoTrasvasijado = OperacionTrasvasijar().operacionTrasvasijar(noVisitados[i], j, k);
+                            int codigoHash = Hash().crearCodigoHash(estadoTrasvasijado, capacidad);
+                            if (!Hash().buscarEstadoHash(estadoTrasvasijado, all, codigoHash, capacidad)){
+                                Hash().insertarEstadoHash(estadoTrasvasijado, all, codigoHash);
                                 noVisitadosAux[indiceAux] = estadoTrasvasijado;
                                 indiceAux++;
                             }
@@ -133,10 +86,27 @@ void JugProb::resolver(GrupoBidones nodo){
 
                 // Comprobar cuanta memoria le queda a los arreglos
                 // Si no hay memoria, se aumenta la capacidad de los arreglos
+                if (indiceAux >= (capacidad * 3 / 4)){
+                    capacidad *= 10;
+                    GrupoBidones* noVisitadosAux2 = new GrupoBidones[capacidad];
+                    GrupoBidones* allAux = new GrupoBidones[capacidad];
+                    for (int i = 0; i < capacidad - 1; i++){
+                        noVisitadosAux2[i] = noVisitadosAux[i];
+                        allAux[i] = all[i];
+                    }
+                    noVisitadosAux = noVisitadosAux2;
+                    all = allAux;
+                }
             }
         }
 
         // Se actualiza el arreglo de noVisitados con los nuevos estados de noVisitadosAux
+        GrupoBidones* noVisitadosAux2 = new GrupoBidones[capacidad];
+        for (int i = 0; i < capacidad - 1; i++){
+            noVisitadosAux2[i] = noVisitadosAux[i];
+        }
+        noVisitados = noVisitadosAux2; // Se actualiza el arreglo de noVisitados
+        noVisitadosAux = new GrupoBidones[capacidad]; // Se limpia el arreglo de noVisitadosAux
     }
 
     return;
