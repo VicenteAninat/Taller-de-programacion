@@ -42,10 +42,11 @@ string GrupoBidones::imprimirBidones(Bidon** bidones, int cantidad){
 
 // Función para imprimir el estado y toda la secuencia de operaciones que lo generaron
 string GrupoBidones::print(){
+    string padre = "";
     if (parent != nullptr) {
-        parent->print();
+        padre = parent->print();
     }
 
-    string salida = "Bidones:\n" + imprimirBidones(bidones, cantidad)+ "\n" + "Operacion: " + operation;
+    string salida = padre + "Bidones:\n" + imprimirBidones(bidones, cantidad)+ "\n" + "Operacion: " + operation + "\n";
     return salida;
 }

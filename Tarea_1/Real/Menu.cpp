@@ -15,7 +15,11 @@ void Menu::mostrarMenu(){
         return;
     } 
     else {
+        auto start = chrono::high_resolution_clock::now(); // Se inicia el cronometro
         JugProb().resolver(caso); // Se llama al metodo resolver
+        auto end = chrono::high_resolution_clock::now(); // Se finaliza el cronometro
+        chrono::duration<double> tiempo = end - start; // Se
+        cout << "El tiempo de ejecucion fue de: " << tiempo.count() << " segundos" << endl;
         return;
     }
 }

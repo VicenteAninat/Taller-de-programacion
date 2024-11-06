@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <chrono>
 #include "Leer.h"
 #include "JugProb.h"
 

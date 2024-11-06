@@ -1,7 +1,7 @@
 #include "Menu.h"
 
-void main(){
+int main(){
     Menu menu;
     menu.mostrarMenu();
-    return;
+    return 0;
 }

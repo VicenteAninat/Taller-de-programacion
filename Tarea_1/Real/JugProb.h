@@ -7,10 +7,13 @@
 #include "OperacionVaciar.h"
 #include "OperacionTrasvasijar.h"
 #include "Hash.h"
+#include "Queue.h"
 #include <random>
 
 class JugProb{
     public:
+
+    int calcularDistancia(GrupoBidones estado);
 
     void resolver(GrupoBidones grupo);
 };
