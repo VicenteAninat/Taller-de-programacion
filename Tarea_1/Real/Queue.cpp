@@ -13,7 +13,7 @@ void Queue::enqueue(GrupoBidones val) {
 
 void Queue::dequeue() {
     if (isEmpty()) {
-        std::cerr << "Queue is empty, cannot dequeue." << std::endl;
+        std::cerr << "La cola esta vacia, no se puede desencolar" << std::endl;
         return;
     }
     Node* temp = front;
@@ -27,7 +27,7 @@ void Queue::dequeue() {
 
 GrupoBidones Queue::getFront() {
     if (isEmpty()) {
-        std::cerr << "Queue is empty, cannot get front." << std::endl;
+        std::cerr << "La cola está vacia. No se puede obtener el primer elemento" << std::endl;
         exit(EXIT_FAILURE);
     }
     return front->data;

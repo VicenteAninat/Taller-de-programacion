@@ -25,10 +25,26 @@ GrupoBidones Leer::leerArchivo(string nombreArchivo) {
         getline(archivo, lineaCapacidades); // Se lee la primera linea del archivo
         getline(archivo, lineaObjetivos); // Se lee la segunda linea del archivo
 
-        if (lineaCapacidades.length() != lineaObjetivos.length()){
+        // Contar la cantidad de bidones
+        int largoCapacidades = 1;
+        for (int i = 0; i < lineaCapacidades.length(); i++){
+            if (lineaCapacidades[i] == ' '){
+                largoCapacidades++;
+            }
+        }
+        int largoObjetivos = 1;
+        for (int i = 0; i < lineaObjetivos.length(); i++){
+            if (lineaObjetivos[i] == ' '){
+                largoObjetivos++;
+            }
+        }
+
+        // Se comprueba que las capacidades y los objetivos tengan la misma cantidad de bidones
+        if (largoCapacidades != largoObjetivos){
             cerr << "Error en el archivo, las especificaciones de los bidones no coinciden." << endl;
             return GrupoBidones(0);
         }
+        // Si son iguales, se inicia la lectura
         else{
             // Se inicializa la linea de capacidades para ser separada
             istringstream capacidades (lineaCapacidades);
@@ -38,9 +54,11 @@ GrupoBidones Leer::leerArchivo(string nombreArchivo) {
             int contador = 0;
             istringstream capacidades2 (lineaCapacidades);
 
+            // Se cuenta la cantidad de bidones
             while (capacidades2) {
                 string capacidad;
                 capacidades2 >> capacidad;
+                // Si la capacidad no es un numero, se imprime un mensaje de error
                 if (capacidad.find_first_not_of("0123456789") != string::npos){
                     cerr << "Error en el archivo, se espera un numero." << endl;
                     return GrupoBidones(0);
@@ -50,6 +68,7 @@ GrupoBidones Leer::leerArchivo(string nombreArchivo) {
                 }
             }
             contador--;
+
             // Se crea un arreglo de punteros a objetos de la clase Bidon
             Bidon** bidones = new Bidon*[contador];
 
@@ -68,6 +87,7 @@ GrupoBidones Leer::leerArchivo(string nombreArchivo) {
                 int index = 0; // Se inicializa el indice de los bidones
                 Bidon** bidones;
                 bidones = new Bidon* [contador];
+                // Se leen las capacidades y los objetivos
                 while (index < contador){
                     // Se convierten las capacidades y objetivos a enteros
                     int capacidadInt = stoi(capacidad);
@@ -104,7 +124,9 @@ GrupoBidones Leer::leerArchivo(string nombreArchivo) {
                     // El archivo se cierra una vez leido
                     archivo.close();
                     return GrupoBidones(0);
-                } else {
+                }
+                // Si no hay errores, se imprime un mensaje de archivo valido y se retorna el estado inicial
+                else {
                     cout << "Archivo valido.\n" << endl;
                     GrupoBidones grupoBidones = GrupoBidones(bidones, nullptr, "Estado inicial", contador);
                     // El archivo se cierra una vez leido

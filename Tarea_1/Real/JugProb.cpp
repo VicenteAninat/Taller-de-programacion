@@ -1,22 +1,17 @@
 // Archivo de implementación de la clase JugProb.h
-#include "JugProb.h"
-
-int JugProb::calcularDistancia(GrupoBidones estado){
-    int distancia = 0;
-    for (int i = 0; i < estado.cantidad; i++){
-        distancia += abs(estado.bidones[i]->aguaActual - estado.bidones[i]->aguaObjetivo);
-    }
-    return distancia;
-}
+#include "JugProb.h"    
 
 void JugProb::resolver(GrupoBidones nodo){
-    int capacidad = 1000;
+    int capacidad = 10000;
+    int contador;
     Queue colaNoVisitados;
+    Queue colaNoVisitadosAux;
     Queue colaPorVisitar;
 
     colaNoVisitados.enqueue(nodo);
 
     GrupoBidones* all = new GrupoBidones[capacidad];
+    GrupoBidones* allAux = new GrupoBidones[capacidad];
     all[0] = nodo;
 
     bool solucionEncontrada = false;
@@ -24,9 +19,17 @@ void JugProb::resolver(GrupoBidones nodo){
     int indiceAux;
     bool esSolucion;
 
+    GrupoBidones estadoActual;
+
     while (!solucionEncontrada) {
-        GrupoBidones estadoActual = colaNoVisitados.getFront();
-        colaNoVisitados.dequeue();
+        
+        if (colaNoVisitadosAux.isEmpty()){
+            estadoActual = colaNoVisitados.getFront();
+            colaNoVisitados.dequeue();
+        } else {
+            estadoActual = colaNoVisitadosAux.getFront();
+            colaNoVisitadosAux.dequeue();
+        }
 
         // Se comprueba si el estado actual es solución
         esSolucion = true;
@@ -51,9 +54,10 @@ void JugProb::resolver(GrupoBidones nodo){
 
                 int codigoHash = Hash().crearCodigoHash(estadoLlenado, capacidad);
 
-                if (!Hash().buscarCompararMemoria(estadoLlenado, all, capacidad)) {
+                if (!Hash().encontrarEstadoHash(estadoLlenado, all, codigoHash, capacidad) && 
+                    !Hash().encontrarEstadoHashAux(estadoLlenado, all, codigoHash)) {
                     Hash().insertarEstadoHash(estadoLlenado, all, codigoHash, capacidad);
-                    colaNoVisitados.enqueue(estadoLlenado);
+                    colaPorVisitar.enqueue(estadoLlenado);
                 }
             }
 
@@ -63,9 +67,10 @@ void JugProb::resolver(GrupoBidones nodo){
 
                 int codigoHash = Hash().crearCodigoHash(estadoVaciado, capacidad);
 
-                if (!Hash().buscarCompararMemoria(estadoVaciado, all, capacidad)) {
+                if (!Hash().encontrarEstadoHash(estadoVaciado, all, codigoHash, capacidad) &&
+                    !Hash().encontrarEstadoHashAux(estadoVaciado, all, codigoHash)) {
                     Hash().insertarEstadoHash(estadoVaciado, all, codigoHash, capacidad);
-                    colaNoVisitados.enqueue(estadoVaciado);
+                    colaPorVisitar.enqueue(estadoVaciado);
                 }
             }
 
@@ -76,12 +81,39 @@ void JugProb::resolver(GrupoBidones nodo){
 
                     int codigoHash = Hash().crearCodigoHash(estadoTrasvasado, capacidad);
 
-                    if (!Hash().buscarCompararMemoria(estadoTrasvasado, all, capacidad)) {
+                    if (!Hash().encontrarEstadoHash(estadoTrasvasado, all, codigoHash, capacidad) &&
+                        !Hash().encontrarEstadoHashAux(estadoTrasvasado, all, codigoHash)) {
                         Hash().insertarEstadoHash(estadoTrasvasado, all, codigoHash, capacidad);
-                        colaNoVisitados.enqueue(estadoTrasvasado);
+                        colaPorVisitar.enqueue(estadoTrasvasado);
                     }
                 }
             }
+
+            // Ordenamiento segun distancia
+            while (!colaPorVisitar.isEmpty()) {
+                if (colaPorVisitar.getFront().distancia < estadoActual.distancia) {
+                    colaNoVisitados.enqueue(colaPorVisitar.getFront());
+                    colaPorVisitar.dequeue();
+                } else {
+                    colaNoVisitadosAux.enqueue(colaPorVisitar.getFront());
+                    colaPorVisitar.dequeue();
+                }
+            }
+            
+            // Expansion de memoria de la tabla hash
+            /*
+            if (contador >= capacidad/2){
+                capacidad = capacidad*10;
+                allAux = new GrupoBidones[capacidad];
+                for (int i = 0; i < capacidad/10; i++){
+                    cout << "Intentando expandir" << endl;
+                    allAux[i] = all[i];
+                }
+                cout << "Memoria expandida" << endl;
+                all = allAux;
+                allAux = nullptr;
+            }
+            */
         }
 
         

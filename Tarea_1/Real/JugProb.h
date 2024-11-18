@@ -13,8 +13,10 @@
 class JugProb{
     public:
 
+    // Método para calcular la distancia de un estado al objetivo
     int calcularDistancia(GrupoBidones estado);
 
+    
     void resolver(GrupoBidones grupo);
 };
 

@@ -11,6 +11,7 @@ Bidon::Bidon() {
 
 // Constructor de la clase Bidon
 Bidon::Bidon(int aguaActual, int aguaMaxima, int aguaObjetivo) {
+    // Se inicializan los valores del bidon con los valores pasados por parametro
     this->aguaActual = aguaActual;
     this->aguaMaxima = aguaMaxima;
     this->aguaObjetivo = aguaObjetivo;

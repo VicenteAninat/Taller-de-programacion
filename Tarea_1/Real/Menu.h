@@ -8,6 +8,10 @@ using namespace std;
 
 class Menu{
     public:
+
+    // Método para mostrar el menú principal
     void mostrarMenu();
+
+    // Método para mostrar el menú de pruebas
     void mostrarMenuTest();
 };

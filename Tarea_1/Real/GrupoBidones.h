@@ -2,6 +2,7 @@
 #define GRUPOBIDONES_H
 
 #include <string>
+#include <cmath>
 #include "Bidon.h"
 
 using namespace std;
@@ -13,12 +14,11 @@ class GrupoBidones{
     GrupoBidones *parent; // Puntero al padre
     string operation; // Operación realizada
     int cantidad; // Cantidad de bidones para construir arreglos
+    int distancia; // Distancia al objetivo
 
-    GrupoBidones();
+    GrupoBidones(); // Constructor por defecto
 
     GrupoBidones(int n); // Constructor por defecto. Necesita la cantidad de bidones
-
-    //GrupoBidones* ClonarBidon(); // Toma un Estado y retorna un puntero a clon para ser el hijo
 
     // Constructor del estado
     GrupoBidones(Bidon** bidones, GrupoBidones *parent, string operation, int cantidad);

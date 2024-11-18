@@ -1,5 +1,5 @@
 FLAGS = -g
-#FLAGS = -O2
+FLAGS = -O2
 
 all: test_Bidon test_GrupoBidones test_Leer test_Hash test_Queue test_OperacionLlenar test_OperacionTrasvasijar test_OperacionVaciar test_JugProb test_Menu Main  
 
@@ -75,4 +75,4 @@ Queue.o : Queue.cpp Queue.h
 
 
 clean:
-	rm -f *.o test_Bidon test_GrupoBidones test_JugProb test_Leer test_Main test_Menu test_OperacionLlenar test_OperacionTrasvasijar test_OperacionVaciar test_Hash Queue
+	rm -f *.o test_Bidon test_GrupoBidones test_JugProb test_Leer test_Main test_Menu test_OperacionLlenar test_OperacionTrasvasijar test_OperacionVaciar test_Hash test_Queue Main

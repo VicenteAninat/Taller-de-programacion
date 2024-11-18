@@ -6,6 +6,7 @@
 class OperacionLlenar : public Operacion {
     public:
 
+    // Sobrecarga de la operación de llenado
     GrupoBidones operacion(GrupoBidones grupo, int indice) override;
 };
 
