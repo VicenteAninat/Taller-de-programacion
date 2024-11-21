@@ -1,6 +1,9 @@
 #include "Estado.cpp"
 
 int main() {
+    
+
+    /*
     Nodo* Nodo1 = new Nodo();
     Nodo* Nodo2 = new Nodo();
     Nodo* Nodo3 = new Nodo();
@@ -11,7 +14,7 @@ int main() {
     Nodo3->id = 3;
     Nodo4->id = 4;
 
-    Nodo1->vecinos = new Nodo*[3];
+    Nodo1->vecinos = unordered_map<int, set<int>>();
     Nodo2->vecinos = new Nodo*[3];
     Nodo3->vecinos = new Nodo*[3];
     Nodo4->vecinos = new Nodo*[3];
@@ -78,6 +81,9 @@ int main() {
     estado->grafo = grafo;
     estado->grafoNoColoreado = grafo;
 
-    estado->resolverBnB();
+
+
+    estado->resolverBnB(2);
     return 0;
+    */
 }

@@ -2,11 +2,9 @@
 
 class Estado {
 public:
-    Grafo* grafo;
-    Grafo* grafoColoreado;
-    Grafo* grafoNoColoreado;
+    Grafo* grafo; // Grafo del estado
 
-    Grafo* resolverBnB(){
-        
+    Estado() {
+        this->grafo = nullptr;
     }
 };
