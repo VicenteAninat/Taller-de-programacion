@@ -183,6 +183,8 @@ int main() {
     cout << "Numero de colores greedy: " << s.graph.getNumberOfColors() << endl;
     cout << "Mejor coloreo encontrado: ";
     co.best->printColor();
+
+    
     int c = co.backtrack(&s);
     cout << "Numero de colores backtrack : " << c << endl;
     co.best->printColor();

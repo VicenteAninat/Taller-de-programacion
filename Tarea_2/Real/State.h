@@ -1,3 +1,6 @@
+#ifndef STATE_H
+#define STATE_H
+
 #include "Graph.h"
 
 class State {
@@ -55,3 +58,5 @@ class State {
     }
 
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef GRAPH_H
+#define GRAPH_H
+
 #include <unordered_map>
 #include <set>
 #include <vector>
@@ -52,3 +55,5 @@ class Graph {
     */
     void printGraph();
 };
+
+#endif
