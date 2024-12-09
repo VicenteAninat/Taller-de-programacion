@@ -11,4 +11,12 @@ class ColoringOperation {
     int backtrack(State *s);
 
     int branchBound(State *s);
+
+    int newBranchBound(State *s, int lb);
+
+    int newBranchBound2(State *s, int lb);
+
+    int dSatur(State* s);
+
+    int dSaturBranchBound(State* s, int lb, int ub);
 };
