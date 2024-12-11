@@ -15,44 +15,28 @@ class Graph {
     unordered_map<int, int> vertexColor; // Tabla hash de colores
 
     // Metodos
+
     // Constructor por defecto
-    /*
-    Descripción:
-    Entrada:
-    Salida:
-    */
     Graph();
 
     // Constructor con parametros
-    /*
-    Descripción:
-    Entrada:
-    Salida:
-    */
     Graph(vector<vector<int>> edges); 
 
-    // Obteiene el numero de colores usados
-    /*
-    Descripción:
-    Entrada:
-    Salida:
-    */
+    // Descripción: Obtiene el número de colores únicos utilizados en el grafo
+    // Entrada: Ninguna
+    // Salida: Número de colores únicos utilizados (int)
     int getNumberOfColors();
 
-    // Verifica si es posible colorear un nodo con un color dado
-    /*
-    Descripción:
-    Entrada:
-    Salida:
-    */
+    // Descripción: Verifica si un vértice puede ser coloreado con un color 
+    // específico sin que ningún vecino tenga el mismo color
+    // Entrada: Vértice a colorear (int vertex), Color a verificar (int color)
+    // Salida: Verdadero si el vértice puede ser coloreado con el color 
+    // especificado (bool), Falso en caso contrario
     bool canColor(int vertex, int color);
 
-    // Imprime el grafo
-    /*
-    Descripción:
-    Entrada:
-    Salida:
-    */
+    // Descripción: Imprime el grafo mostrando cada vértice y sus vecinos
+    // Entrada: Ninguna
+    // Salida: Ninguna (void)
     void printGraph();
 };
 

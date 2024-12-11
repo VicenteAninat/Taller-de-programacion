@@ -19,13 +19,6 @@ State* Read::readFile(string fileName){
         edges.push_back({n, m});
         edges.push_back({m, n});
     }
-    /*
-    for (int i = 0; i < m; i++) {
-        int u, v;
-        file >> u >> v;
-        edges.push_back({u, v});
-    }
-    */
 
     Graph graph(edges);
     State *s = new State(graph);

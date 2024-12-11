@@ -2,21 +2,36 @@
 
 class ColoringOperation {
     public:
-    State *best; // mejor estado encontrado
+    // Atributos
+    State *best; // Mejor estado encontrado
 
+    // Metodos
+
+    // Constructor por defecto
     ColoringOperation();
 
+    // Descripción: Solucion al VCP con algoritmo Greedy
+    // Entrada: Estado inicial (State *s)
+    // Salida: Numero cromatico de la solucion (int)
     int greedyColoring(State *s);
 
+    // Descripción: Solucion al VCP con algoritmo Backtrack
+    // Entrada: Estado inicial (State *s)
+    // Salida: Numero cromatico de la solucion (int)
     int backtrack(State *s);
 
+    // Descripción: Solucion al VCP con algoritmo BranchBound
+    // Entrada: Estado inicial (State *s)
+    // Salida: Numero cromatico de la solucion (int)
     int branchBound(State *s);
 
-    int newBranchBound(State *s, int lb);
-
-    int newBranchBound2(State *s, int lb);
-
+    // Descripción: Solucion al VCP con algoritmo DSatur
+    // Entrada: Estado inicial (State *s)
+    // Salida: Numero cromatico de la solucion (int)
     int dSatur(State* s);
 
+    // Descripción: Solucion al VCP con algoritmo Branchbound y heurística basada en DSatur
+    // Entrada: Estado inicial (State *s)
+    // Salida: Numero cromatico de la solucion (int)
     int dSaturBranchBound(State* s, int lb, int ub);
 };
