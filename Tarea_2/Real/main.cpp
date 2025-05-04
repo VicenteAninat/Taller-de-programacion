@@ -52,6 +52,7 @@ int main() {
     ColoringOperation co3;
     ColoringOperation co4;
 
+    /**/
     // Inicia el reloj
     auto start = chrono::high_resolution_clock::now();
     co.greedyColoring(s);
